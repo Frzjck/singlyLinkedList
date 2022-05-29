@@ -91,10 +91,30 @@ describe("push method", () => {
         });
     });
     it("should accept multiple parammeters", () => {
-        expect(list.push(1, 3, 8, 19)).toEqual(4);
+        expect(list.push("any val1", "any val2", "any val3", "any val4")).toEqual(4);
         expect(list.tail).toEqual({
-            val: 19,
+            val: "any val4",
             next: null
+        });
+        expect(list).toEqual({
+            length: 4,
+            head: {
+                val: "any val1",
+                next: {
+                    val: "any val2",
+                    next: {
+                        val: "any val3",
+                        next: {
+                            val: "any val4",
+                            next: null
+                        }
+                    }
+                }
+            },
+            tail: {
+                val: "any val4",
+                next: null
+            }
         });
     });
 });
@@ -116,9 +136,9 @@ describe("getNode method", () => {
             next: null
         });
     });
-    it("should return undefined if arg is out of bounds", () => {
+    it("should return null if arg is out of bounds", () => {
         list.push(1, 2);
-        expect(list.getNode(15)).toBeUndefined();
+        expect(list.getNode(15)).toBe(null);
     });
 });
 
@@ -208,6 +228,92 @@ describe("pop method", () => {
             },
             tail: {
                 val: "any val2",
+                next: null
+            }
+        });
+    });
+});
+describe("shift method", () => {
+    it("should return undefined if arr length is 0", () => {
+        expect(list.shift()).toBeNull();
+    });
+    it("should return first elem if length is 1", () => {
+        list.push("any val1");
+        expect(list.shift()).toEqual({
+            val: "any val1",
+            next: null
+        });
+    });
+    it("should set head and tail to null if length is 1", () => {
+        list.push("any val1");
+        list.shift();
+        expect(list.head).toBeNull();
+        expect(list.tail).toBeNull();
+    });
+    it("should reduce length by 1", () => {
+        list.push("any val1", "any val2", "any val3", "any val4", "any val5", "any val6");
+        expect(list.length).toBe(6);
+        list.shift();
+        expect(list.length).toBe(5);
+        list.shift();
+        expect(list.length).toBe(4);
+        list.shift();
+        expect(list.length).toBe(3);
+        list.shift();
+        expect(list.length).toBe(2);
+        list.shift();
+        expect(list.length).toBe(1);
+        list.shift();
+        expect(list.length).toBe(0);
+    });
+    it("should not reduce length if length is 0", () => {
+        list.shift();
+        expect(list.length).toBe(0);
+    });
+    it("should remove first elem of the list", () => {
+        list.push("any val1", "any val2", "any val3", "any val4");
+        list.shift();
+        expect(list).toEqual({
+            length: 3,
+            head: {
+                val: "any val2",
+                next: {
+                    val: "any val3",
+                    next: {
+                        val: "any val4",
+                        next: null
+                    }
+                }
+            },
+            tail: {
+                val: "any val4",
+                next: null
+            }
+        });
+        list.shift();
+        expect(list).toEqual({
+            length: 2,
+            head: {
+                val: "any val3",
+                next: {
+                    val: "any val4",
+                    next: null
+                }
+            },
+            tail: {
+                val: "any val4",
+                next: null
+            }
+        });
+        list.shift();
+        expect(list).toEqual({
+            length: 1,
+            head: {
+                val: "any val4",
+                next: null
+            },
+            tail: {
+                val: "any val4",
                 next: null
             }
         });

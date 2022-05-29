@@ -26,7 +26,7 @@ class SinglyLinkedList {
     getNode(idx) {
         if (idx > this.length - 1) {
             console.log("Out of bounds!");
-            return undefined;
+            return null;
         }
         let current = this.head;
         for (let i = 0; i < idx; i++) current = current.next;
@@ -42,6 +42,16 @@ class SinglyLinkedList {
             this.tail = this.getNode(this.length - 2);
             this.tail.next = null;
         }
+        if (this.length > 0) this.length--;
+        return result;
+    }
+
+    shift() {
+        let result = this.head;
+        if (this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        } else if (this.length > 1) this.head = this.head.next;
         if (this.length > 0) this.length--;
         return result;
     }
