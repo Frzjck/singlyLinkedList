@@ -55,16 +55,18 @@ class SinglyLinkedList {
         if (this.length > 0) this.length--;
         return result;
     }
-    unshift(val) {
-        let newNode = new Node(val);
-        if (this.head === null) {
-            this.head = newNode; //
-            this.tail = this.head;
-        } else {
-            newNode.next = this.head;
-            this.head = newNode;
+    unshift(...vals) {
+        for (let val of vals) {
+            let newNode = new Node(val);
+            if (this.head === null) {
+                this.head = newNode; //
+                this.tail = this.head;
+            } else {
+                newNode.next = this.head;
+                this.head = newNode;
+            }
+            this.length++;
         }
-        this.length++;
         return this.length;
     }
 }

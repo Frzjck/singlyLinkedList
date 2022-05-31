@@ -374,6 +374,31 @@ describe("unshift method", () => {
             }
         });
     });
-    it("should reasign tail property to new node", () => {});
-    it("should accept multiple parammeters", () => {});
+    it("should accept multiple parammeters", () => {
+        expect(list.unshift("any val1", "any val2", "any val3", "any val4")).toEqual(4);
+        expect(list.tail).toEqual({
+            val: "any val1",
+            next: null
+        });
+        expect(list).toEqual({
+            length: 4,
+            head: {
+                val: "any val4",
+                next: {
+                    val: "any val3",
+                    next: {
+                        val: "any val2",
+                        next: {
+                            val: "any val1",
+                            next: null
+                        }
+                    }
+                }
+            },
+            tail: {
+                val: "any val1",
+                next: null
+            }
+        });
+    });
 });
