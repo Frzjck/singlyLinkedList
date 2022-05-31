@@ -319,3 +319,61 @@ describe("shift method", () => {
         });
     });
 });
+
+describe("unshift method", () => {
+    it("should return new length", () => {
+        expect(list.unshift(1)).toEqual(1);
+        expect(list.unshift(3)).toEqual(2);
+        expect(list.unshift(8)).toEqual(3);
+        expect(list.unshift(19)).toEqual(4);
+    });
+    it("should add new node to the start of the list", () => {
+        list.unshift(1);
+        expect(list).toEqual({
+            length: 1,
+            head: {
+                val: 1,
+                next: null
+            },
+            tail: {
+                val: 1,
+                next: null
+            }
+        });
+        list.unshift(2);
+        expect(list).toEqual({
+            length: 2,
+            head: {
+                val: 2,
+                next: {
+                    val: 1,
+                    next: null
+                }
+            },
+            tail: {
+                val: 1,
+                next: null
+            }
+        });
+        list.unshift(3);
+        expect(list).toEqual({
+            length: 3,
+            head: {
+                val: 3,
+                next: {
+                    val: 2,
+                    next: {
+                        val: 1,
+                        next: null
+                    }
+                }
+            },
+            tail: {
+                val: 1,
+                next: null
+            }
+        });
+    });
+    it("should reasign tail property to new node", () => {});
+    it("should accept multiple parammeters", () => {});
+});
